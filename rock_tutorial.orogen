@@ -14,11 +14,20 @@ task_context "RockTutorialVisualization" do
    port_driven "pose"
 end
 
-
+# Declare a new task context (i.e., a component)
+task_context "RockTutorialControl" do
+   # Declare input port motion_command
+   input_port "motion_command", "base::MotionCommand2D"
+   # Declare output port pose
+   output_port "pose", "base::Pose"
+end
 
 # Declares a deployment, i.e. an actual executable that contains various tasks.
 deployment "rock_tutorial" do
-    task("rock_tutorial", "RockTutorialVisualization")
+    task("rock_tutorial_visualization", "RockTutorialVisualization")
 
+    # Declares task as periodic, with a period of 10ms
+    task("rock_tutorial_control", "RockTutorialControl").
+        periodic(0.01)
 end
 
