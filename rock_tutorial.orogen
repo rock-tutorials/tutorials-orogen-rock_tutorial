@@ -1,0 +1,20 @@
+name "rock_tutorial"
+# Optionally declare the version number
+# version "0.1"
+
+# If new data types need to be defined, they have to be put in a separate C++
+# header, and this header will be loaded here
+# import_types_from "rock_tutorialType.hpp"
+
+# If the component/deployments use data types that are defined in other oroGen
+# projects, these projects should be imported there as well.
+# import_types_from "base"
+
+
+# Declares a deployment, i.e. an actual executable that contains various tasks.
+deployment "rock_tutorial_test" do
+    # This is a test deployment that should not be installed
+    do_not_install
+
+end
+

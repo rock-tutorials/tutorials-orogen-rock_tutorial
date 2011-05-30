@@ -1,0 +1,22 @@
+<package>
+  <description brief="orogen tasks for the rock tutorial">
+    This modul contains two Tasks, .. and ..
+    .. uses the vizkit RockVisualization plugin to 
+    display a rock. 
+    .. receives a 2d motion commad and generates in 
+    each time step a new position and orientation for the tutorial rock.
+  </description>
+  <author>Sascha Arnold/sascha.arnold@dfki.de/</author>
+  <license></license>
+  <url>http://</url>
+  <logo>http://</logo>
+
+  <!-- rock library dependencies -->
+  <depend package="tutorial/rock_tutorial-viz" />
+  <depend package="base/types" />
+
+  <versioncontrol type="git" url="" />
+  <export>
+    <cpp cflags="" lflags="" />
+  </export>
+</package>
