@@ -1,20 +1,24 @@
 name "rock_tutorial"
-# Optionally declare the version number
-# version "0.1"
+version "0.1"
 
-# If new data types need to be defined, they have to be put in a separate C++
-# header, and this header will be loaded here
-# import_types_from "rock_tutorialType.hpp"
+import_types_from "base"
 
-# If the component/deployments use data types that are defined in other oroGen
-# projects, these projects should be imported there as well.
-# import_types_from "base"
+using_library "rock_tutorial-viz"
+using_library "vizkit"
+
+# Declare a new task context (i.e., a component)
+task_context "RockTutorialVisualization" do
+   # Declare input port pose
+   input_port "pose", "base::Pose"
+   # The update hook will be called if the input port 'pose' has new data
+   port_driven "pose"
+end
+
 
 
 # Declares a deployment, i.e. an actual executable that contains various tasks.
-deployment "rock_tutorial_test" do
-    # This is a test deployment that should not be installed
-    do_not_install
+deployment "rock_tutorial" do
+    task("rock_tutorial", "RockTutorialVisualization")
 
 end
 
