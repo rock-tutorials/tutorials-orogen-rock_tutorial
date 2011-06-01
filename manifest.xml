@@ -13,7 +13,7 @@
   <logo>http://</logo>
 
   <!-- rock library dependencies -->
-  <depend package="tutorial/rock_tutorial-viz" />
+  <depend package="tutorial/rock_tutorial" />
   <depend package="base/types" />
 
   <versioncontrol type="git" url="" />
