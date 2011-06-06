@@ -7,7 +7,7 @@
 
 #include <vizkit/QVizkitWidget.hpp>
 #include <vizkit/QtThreadedWidget.hpp>
-#include <rock_tutorial-viz/RockVisualization.hpp>
+#include <rock_tutorial/RockVisualization.hpp>
 
 namespace rock_tutorial {
     class RockTutorialVisualization : public RockTutorialVisualizationBase
