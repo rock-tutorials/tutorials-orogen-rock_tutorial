@@ -7,6 +7,8 @@ using namespace rock_tutorial;
 RockTutorialVisualization::RockTutorialVisualization(std::string const& name, TaskCore::TaskState initial_state)
     : RockTutorialVisualizationBase(name, initial_state)
 {
+    vizkitWidget = 0;
+    rockVizPlugin = 0;
 }
 
 RockTutorialVisualization::RockTutorialVisualization(std::string const& name, RTT::ExecutionEngine* engine, TaskCore::TaskState initial_state)
@@ -31,15 +33,7 @@ RockTutorialVisualization::~RockTutorialVisualization()
 //     return true;
 // }
 bool RockTutorialVisualization::startHook()
-{
-    // check if input port is connected
-    if (!_pose.connected())
-    {
-        std::cerr << TaskContext::getName() << ": " 
-                    << "Input port 'pose' is not connected." << std::endl;
-        return false;
-    }
-    
+{    
     // start thread containing the vizkit widget
     app.start();
     vizkitWidget = app.getWidget();
@@ -72,6 +66,9 @@ void RockTutorialVisualization::cleanupHook()
 {
     // delete the visualization plugin
     if (rockVizPlugin)
+    {
         delete rockVizPlugin;
+        rockVizPlugin = 0;
+    }
 }
 
