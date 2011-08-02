@@ -4,21 +4,16 @@
 #define ROCK_TUTORIAL_ROCKTUTORIALCONTROL_TASK_HPP
 
 #include "rock_tutorial/RockTutorialControlBase.hpp"
+#include <rock_tutorial/RockControl.hpp>
 
 namespace rock_tutorial {
     class RockTutorialControl : public RockTutorialControlBase
     {
 	friend class RockTutorialControlBase;
     protected:
-        void constrainValues(base::MotionCommand2D& motionCommand);
-        void constrainAngle(double& angle);
-        
-        base::MotionCommand2D actualCommand;
-        base::Pose currentPose;
-        double currentHeading;
-        double currentRoll;
-        double taskPeriod;
-
+	RockControl *control;
+	double taskPeriod;
+	
     public:
         RockTutorialControl(std::string const& name = "rock_tutorial::RockTutorialControl", TaskCore::TaskState initial_state = Stopped);
         RockTutorialControl(std::string const& name, RTT::ExecutionEngine* engine, TaskCore::TaskState initial_state = Stopped);

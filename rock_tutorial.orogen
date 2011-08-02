@@ -2,17 +2,7 @@ name "rock_tutorial"
 version "0.1"
 
 import_types_from "base"
-
-using_library "rock_tutorial-viz"
-using_library "vizkit"
-
-# Declare a new task context (i.e., a component)
-task_context "RockTutorialVisualization" do
-   # Declare input port pose
-   input_port "pose", "base::Pose"
-   # The update hook will be called if the input port 'pose' has new data
-   port_driven "pose"
-end
+using_library "rock_tutorial"
 
 # Declare a new task context (i.e., a component)
 task_context "RockTutorialControl" do
@@ -24,8 +14,6 @@ end
 
 # Declares a deployment, i.e. an actual executable that contains various tasks.
 deployment "rock_tutorial" do
-    task("rock_tutorial_visualization", "RockTutorialVisualization")
-
     # Declares task as periodic, with a period of 10ms
     task("rock_tutorial_control", "RockTutorialControl").
         periodic(0.01)
