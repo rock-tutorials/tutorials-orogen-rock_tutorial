@@ -6,7 +6,7 @@ include Orocos
 Orocos.initialize
 
 ## create a widget for 3d display
-view3d = Vizkit.default_loader.create_widget('vizkit::QVizkitWidget')
+view3d = Vizkit.default_loader.create_widget('vizkit::Vizkit3DWidget')
 
 #show it
 view3d.show()
