@@ -46,16 +46,25 @@ bool RockTutorialControl::startHook()
 
 void RockTutorialControl::updateHook()
 {    
-    //read new motion command if available
+    // read new motion command if available. If not, default to the (0, 0)
+    // motion command
     base::MotionCommand2D motionCommand;
     _motion_command.readNewest(motionCommand);
 
-    //compute new position based on the input command
+    // Compute new position based on the input command
     base::Pose currentPose = control->computeNextPose(taskPeriod, motionCommand);
-    
-    //write pose on output port
-    if(_pose.connected())
-        _pose.write(currentPose);
+    // This is for backward compatibility only
+    _pose.write(currentPose);
+
+    // Now write the actual pose
+    base::samples::RigidBodyState rbs;
+    rbs.time = base::Time::now();
+    rbs.invalidate();
+    rbs.position = currentPose.position;
+    rbs.cov_position = Eigen::Matrix3d::Zero();
+    rbs.orientation = currentPose.orientation;
+    rbs.cov_orientation = Eigen::Matrix3d::Zero();
+    _pose_samples.write(rbs);
 }
 
 // void RockTutorialControl::errorHook()
