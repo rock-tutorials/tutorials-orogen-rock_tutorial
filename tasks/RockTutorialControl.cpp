@@ -52,18 +52,14 @@ void RockTutorialControl::updateHook()
     _motion_command.readNewest(motionCommand);
 
     // Compute new position based on the input command
-    base::Pose currentPose = control->computeNextPose(taskPeriod, motionCommand);
+    base::samples::RigidBodyState rbs = control->computeNextPose(taskPeriod, motionCommand);
     // This is for backward compatibility only
-    _pose.write(currentPose);
 
     // Now write the actual pose
-    base::samples::RigidBodyState rbs;
     rbs.time = base::Time::now();
-    rbs.invalidate();
-    rbs.position = currentPose.position;
-    rbs.cov_position = Eigen::Matrix3d::Zero();
-    rbs.orientation = currentPose.orientation;
-    rbs.cov_orientation = Eigen::Matrix3d::Zero();
+    rbs.invalidateCovariances();
+    rbs.invalidateValues(false,false);
+
     _pose_samples.write(rbs);
 }
 
@@ -77,7 +73,10 @@ void RockTutorialControl::updateHook()
 // 
 // }
 
-// void RockTutorialControl::cleanupHook()
-// {
-// 
-// }
+void RockTutorialControl::cleanupHook()
+{
+    if ( control ) {
+        delete control;
+        control = 0;
+    } 
+}

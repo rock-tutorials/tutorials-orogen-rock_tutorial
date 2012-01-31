@@ -8,25 +8,12 @@ using_library "rock_tutorial"
 task_context "RockTutorialControl" do
    # Get the command as input
    input_port "motion_command", "base::MotionCommand2D"
-   # This is here for backward compatibility only. Poses are usually
-   # represented, when put on ports, by base::samples::RigidBodyState (see
-   # below)
-   output_port "pose", "base::Pose"
+   
    # Output the pose using Rock's general pose type
    #
    #   http://rock-robotics.org/documentation/base_types.html
    output_port "pose_samples", "base::samples::RigidBodyState"
 
    # When deploying this task, use a 10ms period by default
-   #
-   # This is only a default, it can be overriden in deployments
    periodic(0.01)
 end
-
-# Declares a deployment, i.e. an actual executable that contains various tasks.
-deployment "rock_tutorial" do
-    # Declares task as periodic, with a period of 10ms
-    task("rock_tutorial_control", "RockTutorialControl").
-        periodic(0.01)
-end
-

@@ -1,32 +1,16 @@
 require 'orocos'
-require 'vizkit'
+require 'readline'
 include Orocos
 
 ## Initialize orocos ##
 Orocos.initialize
 
-## create a widget for 3d display
-view3d = Vizkit.default_loader.create_widget('vizkit::Vizkit3DWidget')
-
-#show it
-view3d.show()
-
-## load and add the 3d plugin for the rock
-vizkit_rock = view3d.createPlugin('rock_tutorial', 'RockVisualization')
-
 ## Execute the deployment 'rock_tutorial' ##
-Orocos.run 'rock_tutorial' do
+Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control' do
 
     ## Get a specific task context ##
     rockControl = TaskContext.get 'rock_tutorial_control'
     
-    ## Connect port to vizkit plugin
-    con = Vizkit.connect_port_to 'rock_tutorial_control', 'pose', :auto_reconnect => true, :pull => false, :update_frequency => 33 do |sample, name|
-	##pass every pose sample to our visualizer plugin
-        vizkit_rock.updatePose(sample)
-        sample
-    end 
-
     ## Create a sample writer for a port ##
     sampleWriter = rockControl.motion_command.writer
     
@@ -39,5 +23,6 @@ Orocos.run 'rock_tutorial' do
     sample.rotation = 0.5
     sampleWriter.write(sample)
 
-    Vizkit.exec
+    Readline::readline("Press Enter to exit\n") do
+    end
 end
