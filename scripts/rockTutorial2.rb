@@ -1,29 +1,14 @@
 require 'orocos'
-require 'vizkit'
+require 'readline'
 include Orocos
 
 ## Initialize orocos ##
 Orocos.initialize
 
-## create a widget for 3d display
-view3d = Vizkit.default_loader.create_widget('vizkit::Vizkit3DWidget')
-
-#show it
-view3d.show()
-
-## load and add the 3d plugin for the rock
-vizkit_rock = view3d.createPlugin('rock_tutorial', 'RockVisualization')
-
-## Execute the deployments 'rock_tutorial' and 'joystick_local' ##
-Orocos.run 'rock_tutorial', 'joystick' do
+## Execute the tasks 'rock_tutorial' and 'joystick' ##
+Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control',
+     'controldev::JoystickTask' => 'joystick' do
   
-    ## Connect port to vizkit plugin
-    con = Vizkit.connect_port_to 'rock_tutorial_control', 'pose', :update_frequency => 33 do |sample, name|
-	##pass every pose sample to our visualizer plugin
-        vizkit_rock.updatePose(sample)
-        sample
-    end 
-
     ## Get the specific task context ##
     rockControl = TaskContext.get 'rock_tutorial_control'
     joystick = TaskContext.get 'joystick'
@@ -32,7 +17,7 @@ Orocos.run 'rock_tutorial', 'joystick' do
     joystick.motion_command.connect_to rockControl.motion_command
 
     ## Set some properties ##
-    joystick.device = "/dev/input/js0"
+    joystick.device = "/dev/input/js0" # This might be another port
 
     ## Configure the tasks ##
     joystick.configure
@@ -41,5 +26,6 @@ Orocos.run 'rock_tutorial', 'joystick' do
     joystick.start
     rockControl.start
 
-    Vizkit.exec
+    Readline::readline("Press Enter to exit\n") do
+    end
 end
