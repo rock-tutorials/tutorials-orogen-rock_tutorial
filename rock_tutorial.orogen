@@ -17,3 +17,7 @@ task_context "RockTutorialControl" do
    # When deploying this task, use a 10ms period by default
    periodic(0.01)
 end
+
+deployment "rock_tutorial" do
+    rock_tutorial_control = task("rock_tutorial_control", "RockTutorialControl")
+end

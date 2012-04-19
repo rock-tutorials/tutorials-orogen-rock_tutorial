@@ -24,9 +24,9 @@ joystickGui.show()
 Orocos.run 'rock_tutorial' do
   
     ## Connect port to vizkit plugin
-    con = Vizkit.connect_port_to 'rock_tutorial_control', 'pose', :update_frequency => 33 do |sample, name|
+    con = Vizkit.connect_port_to 'rock_tutorial_control', 'pose_samples', :update_frequency => 33 do |sample, name|
 	##pass every pose sample to our visualizer plugin
-        vizkit_rock.updatePose(sample)
+        vizkit_rock.updateData(sample)
         sample
     end 
 
