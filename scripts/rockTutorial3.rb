@@ -21,7 +21,7 @@ joystickGui = Vizkit.default_loader.create_widget('VirtualJoystick')
 joystickGui.show()
 
 ## Execute the deployments 'rock_tutorial' ##
-Orocos.run 'rock_tutorial' do
+Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control' do
   
     ## Connect port to vizkit plugin
     con = Vizkit.connect_port_to 'rock_tutorial_control', 'pose_samples', :update_frequency => 33 do |sample, name|
