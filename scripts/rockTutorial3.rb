@@ -4,9 +4,6 @@ include Orocos
 ## Initialize orocos ##
 Orocos.initialize
 
-## create and show a widget for 3d display
-Vizkit.vizkit3d_widget.show
-
 ## load and add the 3d plugin for the rock
 vizkit_rock = Vizkit.default_loader.RockVisualization
 
@@ -26,7 +23,7 @@ Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control' do
     ## Connect port to vizkit plugin
     rockControl.pose_samples.connect_to :update_frequency => 33 do |sample, name|
 	##pass every pose sample to our visualizer plugin
-        vizkit_rock.updateData(sample)
+        vizkit_rock.updateRigidBodyState(sample)
     end 
 
     ## Create a sample writer for a port ##
