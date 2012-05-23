@@ -32,9 +32,13 @@ Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control' do
 
     ## glue the widget to the task writer
     joystickGui.connect(SIGNAL('axisChanged(double, double)')) do |x, y|
-	sample.translation = x
-	sample.rotation = - y.abs() * Math::atan2(y, x.abs())
-	sampleWriter.write(sample)
+        sample.translation = x
+        sample.rotation = if x != 0 || y != 0
+                              - y.abs() * Math::atan2(y, x.abs())
+                          else
+                              0
+                          end
+        sampleWriter.write(sample)
     end	
     
     ## Start the tasks ##
