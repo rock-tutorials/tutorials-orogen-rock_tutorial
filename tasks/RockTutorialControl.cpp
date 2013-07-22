@@ -59,6 +59,8 @@ void RockTutorialControl::updateHook()
     rbs.time = base::Time::now();
     rbs.invalidateCovariances();
     rbs.invalidateValues(false,false);
+    rbs.sourceFrame = _body_frame.get();
+    rbs.targetFrame = _world_frame.get();
 
     _pose_samples.write(rbs);
 }

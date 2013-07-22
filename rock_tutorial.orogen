@@ -14,6 +14,11 @@ task_context "RockTutorialControl" do
    #   http://rock-robotics.org/documentation/base_types.html
    output_port "pose_samples", "base::samples::RigidBodyState"
 
+   # The name of the world frame
+   property "world_frame", "/std/string"
+   # The name of the rock's frame
+   property 'body_frame', '/std/string'
+
    # When deploying this task, use a 10ms period by default
    periodic(0.01)
 end
