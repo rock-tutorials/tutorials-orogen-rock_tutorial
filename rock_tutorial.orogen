@@ -1,6 +1,7 @@
 name "rock_tutorial"
 version "0.1"
 
+import_types_from "rock_tutorialTypes.hpp"
 import_types_from "base"
 using_library "rock_tutorial"
 
