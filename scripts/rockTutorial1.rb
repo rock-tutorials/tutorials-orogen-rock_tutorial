@@ -1,3 +1,7 @@
+#
+# script from  http://rock-robotics.org/master/documentation/tutorials/500_simulate_a_robot.html
+#
+
 require 'orocos'
 require 'readline'
 include Orocos

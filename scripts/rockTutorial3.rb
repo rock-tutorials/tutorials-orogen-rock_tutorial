@@ -1,3 +1,7 @@
+#
+# script from http://rock-robotics.org/master/documentation/tutorials/520_virtual_joystick.html
+#
+
 require 'vizkit'
 include Orocos
 

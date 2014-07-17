@@ -1,3 +1,7 @@
+#
+# script from http://rock-robotics.org/master/documentation/tutorials/510_joystick.html
+#
+
 require 'orocos'
 require 'readline'
 include Orocos
