@@ -21,7 +21,7 @@ Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control' do
     rockControl = TaskContext.get 'rock_tutorial_control'
   
     ## Connect port to vizkit plugin
-    rockControl.pose_samples.connect_to :update_frequency => 33 do |sample, name|
+    rockControl.pose_samples.to_async.on_data :period => 0.1 do |sample| 
 	##pass every pose sample to our visualizer plugin
         vizkit_rock.updateRigidBodyState(sample)
     end 
