@@ -48,7 +48,7 @@ void RockTutorialControl::updateHook()
 {    
     // read new motion command if available. If not, default to the (0, 0)
     // motion command
-    base::MotionCommand2D motionCommand;
+    base::commands::Motion2D motionCommand;
     _motion_command.readNewest(motionCommand);
 
     // Compute new position based on the input command
