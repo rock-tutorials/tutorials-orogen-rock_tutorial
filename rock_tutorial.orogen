@@ -8,7 +8,7 @@ using_library "rock_tutorial"
 # Declare a new task context (i.e., a component)
 task_context "RockTutorialControl" do
    # Get the command as input
-   input_port "motion_command", "base::MotionCommand2D"
+   input_port "motion_command", "base::commands::Motion2D"
    
    # Output the pose using Rock's general pose type
    #
