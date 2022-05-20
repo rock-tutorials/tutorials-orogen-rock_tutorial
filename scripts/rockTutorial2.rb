@@ -11,14 +11,17 @@ Orocos.initialize
 
 ## Execute the tasks 'rock_tutorial' and 'joystick' ##
 Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control',
-     'controldev::JoystickTask' => 'joystick' do
+     'controldev::JoystickTask' => 'joystick',
+     'controldev::GenericRawToMotion2D' => 'command_generator' do
   
     ## Get the specific task context ##
     rockControl = TaskContext.get 'rock_tutorial_control'
     joystick = TaskContext.get 'joystick'
+    command_generator = TaskContext.get 'command_generator'
 
     ## Connect the ports ##
-    joystick.motion_command.connect_to rockControl.motion_command
+    joystick.raw_command.connect_to command_generator.raw_command
+    command_generator.motion_command.connect_to rockControl.motion_command
 
     ## Set some properties ##
     joystick.device = "/dev/input/js0" # This might be another port
