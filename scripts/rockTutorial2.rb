@@ -28,9 +28,11 @@ Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control',
 
     ## Configure the tasks ##
     joystick.configure
+    command_generator.configure
 
     ## Start the tasks ##
     joystick.start
+    command_generator.start
     rockControl.start
 
     Readline::readline("Press Enter to exit\n") do
