@@ -26,6 +26,14 @@ Orocos.run 'rock_tutorial::RockTutorialControl' => 'rock_tutorial_control',
     ## Set some properties ##
     joystick.device = "/dev/input/js0" # This might be another port
 
+    ## set axis config for PS3 Controller
+    ## right stick
+    command_generator.rotation_axis = 3
+    command_generator.translation_axis = 4
+    command_generator.invert_rotation_axis = true
+    command_generator.invert_translation_axis = true
+
+
     ## Configure the tasks ##
     joystick.configure
     command_generator.configure
